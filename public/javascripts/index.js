@@ -38,9 +38,7 @@ var setupFormResults = function () {
     })
 }
 
-$(document).init(function () {
+$(window).load(function () {
     setupAutocomplete();
     setupFormResults();
-
-
 })
