@@ -27,7 +27,10 @@ var setupFormResults = function(){
         $.ajax({
             method:'POST',
             url:'/services/availability',
-            data:$('#search-form').serialize()
+            data:$('#search-form').serialize(),
+            success:function(resultData){
+                $('#results').html(resultData);
+            }
         })
     })
 }

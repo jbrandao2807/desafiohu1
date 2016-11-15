@@ -16,9 +16,5 @@ exports.autocomplete = function (request, response, next) {
 exports.availability = function (request, response, next) {
     var allAvailableDates = availabilityService(request.body);
 
-    if(allAvailableDates){
-        response.json(allAvailableDates);
-    }else{
-        response.json([]);
-    }
+    response.render('searchresults',{items:allAvailableDates});
 }
