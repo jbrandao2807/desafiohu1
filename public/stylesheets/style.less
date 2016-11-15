@@ -1,8 +1,139 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import "typography";
+@import "colors";
+
+html {
+  font-size: ~"@{font-size-base}px";
 }
 
-a {
-  color: #00B7FF;
+body {
+  font-family: Gotham;
+}
+
+.search-widget {
+  max-width: 942px;
+  border: 2px solid @color-alto;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  margin: 10px auto 0 auto;
+
+  .header {
+    border: 2px solid @color-dodger-blue;
+    background-color: @color-dodger-blue;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
+    height: 100px;
+    color: @color-white;
+    text-align: center;
+    margin-bottom: 32px;
+
+    .title {
+      .font-size(40);
+      text-transform: uppercase;
+      font-weight: 300;
+      display: table-cell;
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+    }
+  }
+  .form {
+    .subtitle {
+      .font-size(30);
+      text-align: center;
+      color: @color-dodger-blue;
+    }
+    .location {
+      margin-bottom: 15px;
+
+      .control-label {
+        display: block;
+      }
+      .input-group {
+        .custom-input-group;
+      }
+
+    }
+
+    .period {
+      .control-label {
+        display: block;
+      }
+      .input-group {
+        margin-bottom: 15px;
+        &-begin {
+          .custom-input-group;
+        }
+        &-finish {
+
+          .custom-input-group;
+        }
+        &-no-date {
+          display: block;
+          .form-control {
+            width: 100px;
+            height: 13px;
+            box-shadow: none;
+
+          }
+
+        }
+      }
+    }
+    .submit-button {
+      display: block;
+      text-align: center;
+      margin-bottom: 15px;
+
+      .button {
+        background-color: @color-tree-poppy;
+        border: none;
+        border-radius: 10px;
+        width: 240px;
+        height: 70px;
+        .font-size(20);
+        text-transform: uppercase;
+        color: @color-white;
+
+        &:focus {
+          outline: none;
+        }
+
+      }
+    }
+  }
+}
+
+.custom-input-group() {
+  border: 2px solid @color-alto;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 67px;
+  .input-group-addon {
+    background-color: @color-white;
+    color: @color-tree-poppy;
+    border: none;
+    .font-size(40);
+
+  }
+  .form-control {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 6px;
+    display: table-cell;
+    height: 100%;
+    background-color: @color-white;
+    border: none;
+    box-shadow: none;
+    .font-size(16);
+  }
 }
