@@ -4,7 +4,6 @@
 
 var caching = require('./caching');
 var unique = require('array-unique');
-var moment = require('moment');
 
 function daydiff(first, second) {
     return Math.round((second - first) / (1000 * 60 * 60 * 24));
@@ -13,6 +12,13 @@ function daydiff(first, second) {
 module.exports = function (formData) {
 
     var result = null;
+
+    var cachedResult = caching.resultsCache.get(formData.toString());
+
+    if(cachedResult){
+        return cachedResult;
+    }
+
     if (formData.location) {
         var locationNames = caching.fileCache.get('location-names');
         var hotelIds = locationNames[formData.location.toString().trim()];
@@ -77,6 +83,8 @@ module.exports = function (formData) {
         result = null;
     }
 
+
+    caching.resultsCache.set(formData.toString(),result);
     return result
 
 };
