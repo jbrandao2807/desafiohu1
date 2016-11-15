@@ -3,6 +3,6 @@ var router = express.Router();
 var autocompleteService = require('../services/autocomplete');
 
 /* GET users listing. */
-router.get('/autocomplete', autocompleteService);
+router.get('/autocomplete/(:_term)', autocompleteService);
 
 module.exports = router;
