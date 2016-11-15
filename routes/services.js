@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var autocompleteService = require('../services/autocomplete');
+var servicesController = require('../controllers/servicesController');
 
 /* GET users listing. */
-router.get('/autocomplete/(:_term)', autocompleteService);
+router.get('/autocomplete/(:_term)', servicesController.autocomplete);
+router.post('/availability', servicesController.availability);
 
 module.exports = router;

@@ -16,7 +16,6 @@ body {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  overflow: hidden;
   display: block;
   position: relative;
   margin: 10px auto 0 auto;
@@ -58,7 +57,15 @@ body {
         display: block;
       }
       .input-group {
+
+        .twitter-typeahead {
+          height: 57px;
+        }
         .custom-input-group;
+
+        &-location {
+          overflow: visible;
+        }
       }
 
     }
@@ -136,4 +143,19 @@ body {
     box-shadow: none;
     .font-size(16);
   }
+}
+
+.tt-menu {
+  border: 2px solid @color-alto;
+  background-color: white;
+
+  .tt-suggestion {
+    cursor:pointer;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    border-bottom: 2px solid @color-alto;
+  }
+
 }

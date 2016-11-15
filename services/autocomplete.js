@@ -1,40 +1,31 @@
 /**
  * Created by jonat on 15/11/2016.
  */
-
-var NodeCache = require("node-cache");
-var autocompleteCache = new NodeCache();
-var fs = require('fs');
-var path = require('path');
-var csv = require("fast-csv");
+var caching = require('./caching');
 var fuzzy = require('fuzzy');
-var unique = require('array-unique');
 
-var allDisp = [];
-var fuzzySearchTerms = []
+module.exports = function (term) {
 
+    var results = null;
+    var cachedResult = caching.autocomplete.get(term);
 
-var createAvailabilityCache = function () {
+    if (cachedResult) {
+        results = cachedResult;
+    } else {
+        var options = {
+            pre: '<', post: '>'
+        };
 
-    csv
-        .fromPath("artefatos/hoteis.txt")
-        .on("data", function (data) {
-            allDisp.push(data);
-            fuzzySearchTerms.push(data[1]);
-            fuzzySearchTerms.push(data[2]);
-        })
-        .on("end", function () {
-            fuzzySearchTerms = unique(fuzzySearchTerms);
+        results = fuzzy.filter(term, caching.fileCache.get('autocomplete'), options);
+
+        results = results.map(function (resultItem) {
+            return resultItem.original;
         });
-}
 
-createAvailabilityCache();
+        caching.autocomplete.set(term, results);
 
-module.exports = function (request, response, next) {
+    }
 
-    var options = { pre: '<', post: '>' };
-    var results = fuzzy.filter(request.params._term, fuzzySearchTerms, options);
-
-    response.json({response:results});
+    return results;
 
 }

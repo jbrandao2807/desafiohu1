@@ -1,2 +1,58 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="search-widget">
+    <div class="header">
+        <h1 class="title">
+            <img src="images/hotel-icon.png">
+            Hotéis
+        </h1>
+    </div>
+    <div class="form">
+        <form action="search" method="post" id="search-form">
+            <p class="subtitle">+ 170.000 hotéis, pousadas e resorts no mundo todo.</p>
+            <div class="location col-sm-4">
+                <div class="col-sm-12">
+                    <label class="control-label">Quer ficar onde?</label>
+                </div>
+                <div class="col-sm-12">
+                    <div class="input-group input-group-location">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-map-marker"></i>
+                        </div>
+                        <input type="text" name="location" id="locations-input" placeholder="cidade ou hotel" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="period  col-sm-8">
+                <div class="col-sm-12">
+                    <label class="control-label">Quando? (Entrada e Saída)</label>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group input-group-begin">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </div>
+                        <input name="begin" type="date" placeholder="entrada" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group input-group-finish">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </div>
+                        <input name="end" type="date" placeholder="saída" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="input-group input-group-no-date">
+                        <input type="checkbox" class="form-control" name="nodate">
+                        <span>Ainda não defini as datas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-button">
+                <button class="button"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+            </div>
+        </form>
+
+    </div>
+    <div id="results"></div>
+</div>
