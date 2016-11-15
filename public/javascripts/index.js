@@ -13,7 +13,7 @@ var setupAutocomplete = function () {
         }
     });
 
-    $('#locations-input').typeahead(null, {
+    $('#locations-input').typeahead('destroy').typeahead(null, {
         name: 'locations-input',
         // display: 'original',
         source: locations
@@ -21,22 +21,26 @@ var setupAutocomplete = function () {
 };
 
 
-var setupFormResults = function(){
-    $("#search-form").on('submit',function(e){
+var setupFormResults = function () {
+    $("#search-form").off('submit').on('submit', function (e) {
         e.preventDefault();
         $.ajax({
-            method:'POST',
-            url:'/services/availability',
-            data:$('#search-form').serialize(),
-            success:function(resultData){
+            method: 'POST',
+            url: '/services/availability',
+            data: $('#search-form').serialize(),
+            success: function (resultData) {
                 $('#results').html(resultData);
+            },
+            error: function (err) {
+                console.log('error', err);
             }
         })
     })
 }
 
-$(document).ready(function () {
+$(document).init(function () {
     setupAutocomplete();
     setupFormResults();
+
 
 })

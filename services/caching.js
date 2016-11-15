@@ -49,8 +49,33 @@ var createAvailabilityCache = function () {
         });
 }
 
+var createLocationTermsCache = function () {
+
+    var locationNames = {};
+
+    csv
+        .fromPath("artefatos/hoteis.txt")
+        .on("data", function (data) {
+
+            for (var i = 1; i <= 2; i++) {
+                var locationTerm = data[i].toString().trim();
+                if (locationNames.hasOwnProperty(locationTerm)) {
+                    locationNames[locationTerm].push(data[0]);
+                } else {
+                    locationNames[locationTerm] = [];
+                    locationNames[locationTerm].push(data[0])
+                }
+            }
+        })
+        .on("end", function () {
+            fileCache.set('location-names',locationNames);
+            locationNames = null;
+        });
+}
+
 createAvailabilityCache();
 createAutocompleteAndHotelsCache();
+createLocationTermsCache();
 
 exports.fileCache = fileCache;
 exports.autocomplete = autocompleteCache;
