@@ -15,7 +15,7 @@ module.exports = function (formData) {
 
     try {
         var result = null;
-        var cachedResult = caching.resultsCache.get(formData.toString());
+        var cachedResult = caching.resultsCache.get(JSON.stringify(formData));
 
         if (cachedResult) {
             return cachedResult;
@@ -58,14 +58,16 @@ module.exports = function (formData) {
                             var valid = true;
 
                             if (formData.begin || formData.finish) {
-                                var avItemDate = Date.parse(avItem[1]);
-                                if (!(formData.begin && Date.parse(formData.begin) <= avItemDate)) {
+                                // var avItemDate = new Date(Date.parse(avItem[1]));
+                                var avItemDate = new Date(avItem[1].split('/').reverse().join('/'));
+
+                                if (formData.begin && !(Date.parse(formData.begin) <= avItemDate)) {
                                     valid = false;
                                 }
-                                if (!(formData.finish && Date.parse(formData.finish) >= avItemDate)) {
+                                if (formData.finish && !(Date.parse(formData.finish) >= avItemDate)) {
                                     valid = false;
                                 }
-                                if ((!(parseInt(avItem[3]) > parseInt(daydiff(Date.parse(formData.begin), Date.parse(formData.finish)))))) {
+                                if (formData.begin && formData.finish && (!(parseInt(avItem[3]) > parseInt(daydiff(Date.parse(formData.begin), Date.parse(formData.finish)))))) {
                                     valid = false;
                                 }
 
@@ -87,7 +89,7 @@ module.exports = function (formData) {
         }
 
 
-        caching.resultsCache.set(formData.toString(), result);
+        caching.resultsCache.set(JSON.stringify(formData), result);
         return result;
     } catch (e) {
         console.log(e);
