@@ -9,20 +9,25 @@ function daydiff(first, second) {
     return Math.round((second - first) / (1000 * 60 * 60 * 24));
 }
 
+
+
 module.exports = function (formData) {
 
     var result = null;
-
     var cachedResult = caching.resultsCache.get(formData.toString());
 
-    if(cachedResult){
+    if (cachedResult) {
         return cachedResult;
     }
 
+    var locationNames = caching.fileCache.get('location-names');
+    var hotelsList = caching.fileCache.get('hotels');
+    var availability = caching.fileCache.get('availability');
+
+
     if (formData.location) {
-        var locationNames = caching.fileCache.get('location-names');
+
         var hotelIds = locationNames[formData.location.toString().trim()];
-        var hotelsList = caching.fileCache.get('hotels');
 
         if (hotelIds) {
             var hotelsList = hotelsList.map(function (element, index, currentArray) {
@@ -43,7 +48,7 @@ module.exports = function (formData) {
             hotelsList = unique(hotelsList);
 
 
-            var availability = caching.fileCache.get('availability');
+
             result = [];
             for (var i = 0, l = availability.length; i < l; i++) {
                 var avItem = availability[i];
@@ -79,12 +84,10 @@ module.exports = function (formData) {
                 })
             }
         }
-    } else {
-        result = null;
     }
 
 
-    caching.resultsCache.set(formData.toString(),result);
+    caching.resultsCache.set(formData.toString(), result);
     return result
 
 };
