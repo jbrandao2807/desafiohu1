@@ -57,7 +57,7 @@ module.exports = function (formData) {
                         if (element && avItem[0].toString() === element.id) {
                             var valid = true;
 
-                            if (formData.begin || formData.finish) {
+                            if ((formData.begin || formData.finish) && !formData.nodate) {
                                 // var avItemDate = new Date(Date.parse(avItem[1]));
                                 var avItemDate = new Date(avItem[1].split('/').reverse().join('/'));
 
