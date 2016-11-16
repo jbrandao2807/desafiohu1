@@ -24,10 +24,11 @@ var setupAutocomplete = function () {
 var setupFormResults = function () {
     $("#search-form").off('submit').on('submit', function (e) {
         e.preventDefault();
+        var formData = $('#search-form').serializeArray();
         $.ajax({
             method: 'POST',
             url: '/services/availability',
-            data: $('#search-form').serialize(),
+            data: formData ,
             success: function (resultData) {
                 $('#results').html(resultData);
             },
