@@ -20,3 +20,17 @@ Esses comandos tem que ser o suficiente para configurar meu mac os x OU ubuntu e
 
 ***Artefatos***
 * Imagens e database de hoteis e disponibilidades estão na pasta artefatos
+
+
+
+
+***Notas do Dev***
+ O comando de start do projeto é npm start.
+ Utilizei o loadtest para teste de carga.
+ ```
+ PS C:\Windows\system32> loadtest -c 1200 --rps 1200 http://localhost:3000/services/autocomplete/araru
+ [Tue Nov 15 2016 22:48:15 GMT-0200 (Horário brasileiro de verão)] INFO Requests: 0, requests per second: 0, mean latency: 0 ms
+ [Tue Nov 15 2016 22:48:20 GMT-0200 (Horário brasileiro de verão)] INFO Requests: 6000, requests per second: 1200, mean latency: 40.6 ms
+ [Tue Nov 15 2016 22:48:25 GMT-0200 (Horário brasileiro de verão)] INFO Requests: 12000, requests per second: 1202, meanlatency: 17.6 ms
+ ```
+ 
